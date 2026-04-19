@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build Image') {
+            steps {
+                // Construye la imagen usando el Dockerfile de la carpeta /app
+                sh 'docker build -t flask-app ./app'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Levanta el contenedor usando Docker Compose
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
+}
